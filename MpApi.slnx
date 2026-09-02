@@ -1,0 +1,16 @@
+<Solution>
+  <Folder Name="/samples/" />
+  <Folder Name="/Solution Items/">
+    <File Path="Directory.Build.props" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="MpApi.Core/MpApi.Core.csproj" />
+    <Project Path="MpApi.Extensions.DependencyInjection/MpApi.Extensions.DependencyInjection.csproj" />
+    <Project Path="MpApi.Materials/MpApi.Materials.csproj" />
+    <Project Path="MpApi.Molecules/MpApi.Molecules.csproj" />
+    <Project Path="MpApi.Synthesis/MpApi.Synthesis.csproj" />
+    <Project Path="MpApi.Thermo/MpApi.Thermo.csproj" />
+    <Project Path="MpApi/MpApi.csproj" />
+  </Folder>
+  <Folder Name="/tests/" />
+</Solution>
