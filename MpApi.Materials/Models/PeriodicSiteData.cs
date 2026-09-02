@@ -19,12 +19,3 @@ public sealed record PeriodicSiteData
     [JsonPropertyName("label")]
     public string? Label { get; init; }
 }
-
-public sealed record SpeciesElementData
-{
-    [JsonPropertyName("element")]
-    public required string Element { get; init; }
-
-    [JsonPropertyName("occu")]
-    public double Occupancy { get; init; } = 1.0;
-}

@@ -56,21 +56,17 @@ public sealed class MpThermoClient(IMpHttpClient http) : IMpThermoClient
             pageSize,
             cancellationToken);
     }
-
-    public async Task<PhaseDiagramData?> GetPhaseDiagramAsync(string chemsys, CancellationToken cancellationToken = default)
+    public async Task<IReadOnlyList<ThermoData>> GetByChemsysAsync(string chemsys, CancellationToken cancellationToken = default)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(chemsys);
 
-        var queryParams = new Dictionary<string, object?>
+        var query = new Dictionary<string, object?>
         {
             ["chemsys"] = chemsys
         };
 
-        var response = await _http.GetAsync<PhaseDiagramData>(
-            "materials/phasediagram/",
-            queryParams,
-            cancellationToken).ConfigureAwait(false);
-
-        return response.Data.FirstOrDefault();
+        var res = await _http.GetAsync<ThermoData>("materials/thermo/", query, cancellationToken).ConfigureAwait(false);
+        return res.Data;
     }
+
 }

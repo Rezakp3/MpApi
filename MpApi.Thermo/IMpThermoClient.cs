@@ -10,5 +10,5 @@ public interface IMpThermoClient
     Task<ThermoData?> GetByIdAsync(string materialId, CancellationToken cancellationToken = default);
     Task<IReadOnlyList<ThermoData>> SearchAsync(ThermoSearchCriteria criteria, CancellationToken cancellationToken = default);
     IAsyncEnumerable<ThermoData> StreamSearchAsync(ThermoSearchCriteria criteria, int pageSize = 100, CancellationToken cancellationToken = default);
-    Task<PhaseDiagramData?> GetPhaseDiagramAsync(string chemsys, CancellationToken cancellationToken = default);
+    Task<IReadOnlyList<ThermoData>> GetByChemsysAsync(string chemsys, CancellationToken cancellationToken = default);
 }

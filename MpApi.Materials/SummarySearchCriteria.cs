@@ -52,7 +52,8 @@ public sealed record SummarySearchCriteria
         if (IsStable.HasValue) parameters["is_stable"] = IsStable.Value;
         if (IsMetal.HasValue) parameters["is_metal"] = IsMetal.Value;
         if (IsMagnetic.HasValue) parameters["is_magnetic"] = IsMagnetic.Value;
-        if (CrystalSystem.HasValue) parameters["crystal_system"] = CrystalSystem.Value.ToString();
+        if (CrystalSystem.HasValue)
+            parameters["crystal_system"] = CrystalSystem.Value.ToString().ToLowerInvariant();
 
         // Numeric ranges
         if (BandGap?.Min is not null) parameters["band_gap_min"] = BandGap.Value.Min;

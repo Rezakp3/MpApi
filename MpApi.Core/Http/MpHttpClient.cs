@@ -12,7 +12,7 @@ namespace MpApi.Core.Http;
 /// <summary>
 /// Robust, resilient HTTP engine for Materials Project API requests.
 /// </summary>
-public sealed class MpHttpClient(HttpClient httpClient, MpApiOptions options) 
+public sealed class MpHttpClient(HttpClient httpClient, MpApiOptions options)
     : IMpHttpClient
 {
     private readonly HttpClient _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
@@ -141,29 +141,33 @@ public sealed class MpHttpClient(HttpClient httpClient, MpApiOptions options)
         {
             throw new MpApiAuthenticationException("Invalid or missing API key. Access denied.", statusCode, errorBody);
         }
-
         throw new MpApiException(
-            $"API request failed with status code {statusCode}: {response.ReasonPhrase}",
-            statusCode,
-            errorBody);
+                $"API request to '{response.RequestMessage?.RequestUri}' failed with status code {statusCode}: {response.ReasonPhrase}. Response: {errorBody}",
+                statusCode,
+                errorBody);
     }
-
     private Uri BuildUri(string endpoint, IReadOnlyDictionary<string, object?>? queryParams)
     {
         var baseAddress = _options.BaseUrl.ToString().TrimEnd('/');
         var cleanEndpoint = endpoint.TrimStart('/');
         var url = $"{baseAddress}/{cleanEndpoint}";
 
-        if (queryParams is null || queryParams.Count == 0)
-            return new Uri(url);
+        var effectiveParams = queryParams is not null
+            ? new Dictionary<string, object?>(queryParams)
+            : new Dictionary<string, object?>();
 
-        var queryString = string.Join("&", queryParams
-            .Where(kvp => kvp.Value is not null)
+        // If specific fields are not requested, ask MP API for all fields
+        if (!effectiveParams.ContainsKey("_fields") && !effectiveParams.ContainsKey("_all_fields"))
+        {
+            effectiveParams["_all_fields"] = "true";
+        }
+
+        var queryString = string.Join("&", effectiveParams
+            .Where(kvp => kvp.Value is not null && !string.IsNullOrWhiteSpace(kvp.Value.ToString()))
             .Select(kvp => $"{Uri.EscapeDataString(kvp.Key)}={Uri.EscapeDataString(FormatQueryValue(kvp.Value!))}"));
 
         return new Uri(string.IsNullOrEmpty(queryString) ? url : $"{url}?{queryString}");
     }
-
     private static string FormatQueryValue(object value) => value switch
     {
         bool b => b.ToString().ToLowerInvariant(),

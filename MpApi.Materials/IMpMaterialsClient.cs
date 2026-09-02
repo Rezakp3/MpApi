@@ -29,4 +29,20 @@ public interface IMpMaterialsClient
     Task<PiezoelectricData?> GetPiezoelectricAsync(string materialId, CancellationToken cancellationToken = default);
     Task<SurfacePropertyData?> GetSurfacePropertiesAsync(string materialId, CancellationToken cancellationToken = default);
     Task<CrystalStructure?> GetStructureAsync(string materialId, CancellationToken cancellationToken = default);
+
+    Task<ElectronicStructureData?> GetElectronicStructureAsync(string materialId, CancellationToken cancellationToken = default);
+    // --- Spectroscopy & XAS ---
+    Task<IReadOnlyList<XasData>> GetXasAsync(string materialId, string? absorbingElement = null, string? edge = null, CancellationToken cancellationToken = default);
+
+    // --- Structural Similarity ---
+    Task<IReadOnlyList<SimilarityData>> GetSimilarMaterialsAsync(string materialId, CancellationToken cancellationToken = default);
+
+    // --- Substrates & Epitaxy ---
+    Task<IReadOnlyList<SubstrateMatchData>> GetSubstratesAsync(string materialId, CancellationToken cancellationToken = default);
+
+    // --- Grain Boundaries ---
+    Task<IReadOnlyList<GrainBoundaryData>> GetGrainBoundariesAsync(string materialId, CancellationToken cancellationToken = default);
+
+    // --- Provenance & History ---
+    Task<ProvenanceData?> GetProvenanceAsync(string materialId, CancellationToken cancellationToken = default);
 }

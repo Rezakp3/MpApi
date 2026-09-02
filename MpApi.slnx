@@ -1,5 +1,7 @@
 <Solution>
-  <Folder Name="/samples/" />
+  <Folder Name="/samples/">
+    <Project Path="MpApi.Playground/MpApi.Playground.csproj" Id="abfa7861-5802-413b-9d69-37b65dbcc927" />
+  </Folder>
   <Folder Name="/Solution Items/">
     <File Path="Directory.Build.props" />
   </Folder>
