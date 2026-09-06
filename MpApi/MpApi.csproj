@@ -1,22 +1,45 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<!-- Target Frameworks: .NET 10.0 supported -->
+		<TargetFrameworks>net10.0</TargetFrameworks>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<LangVersion>latest</LangVersion>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.11" />
-    <PackageReference Include="Microsoft.Extensions.Http" Version="10.0.11" />
-  </ItemGroup>
+		<!-- Package Metadata for NuGet Publication -->
+		<PackageId>MPApi</PackageId>
+		<Version>1.0.0-preview.1</Version>
+		<Authors>Rezakp3;Contributors</Authors>
+		<Company>Materials Project .NET SDK Community</Company>
+		<Description>A high-performance, strongly-typed, modern async C# client for Materials Project API (v2).</Description>
+		<PackageTags>materials-project;materials-science;dft;crystallography;physics;chemistry;api-client</PackageTags>
+		<RepositoryUrl>https://github.com/Rezakp3/MpApi</RepositoryUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<NoWarn>$(NoWarn);1591</NoWarn>
+		<!-- Temporarily suppress missing XML comment warnings during migration -->
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\MpApi.Extensions.DependencyInjection\MpApi.Extensions.DependencyInjection.csproj" />
-    <ProjectReference Include="..\MpApi.Materials\MpApi.Materials.csproj" />
-    <ProjectReference Include="..\MpApi.Molecules\MpApi.Molecules.csproj" />
-    <ProjectReference Include="..\MpApi.Synthesis\MpApi.Synthesis.csproj" />
-    <ProjectReference Include="..\MpApi.Thermo\MpApi.Thermo.csproj" />
-  </ItemGroup>
+	<!-- Essential NuGet Dependencies -->
+	<ItemGroup>
+		<!-- Modern Resilience and Transient Fault Handling -->
+		<PackageReference Include="Polly.Core" Version="8.4.2" />
+
+		<!-- Dependency Injection & Modern HttpClientFactory Abstractions -->
+		<PackageReference Include="Microsoft.Extensions.Http" Version="8.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
+
+		<!-- High-Performance JSON Handling -->
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Common\Utilities\" />
+	  <Folder Include="Domains\Applications\GrainBoundaries\Models\" />
+	  <Folder Include="Domains\Electronic\BandGap\Models\" />
+	  <Folder Include="Domains\Electronic\Xas\Models\" />
+	  <Folder Include="Domains\Thermodynamics\PhaseDiagram\Models\" />
+	  <Folder Include="Extensions\" />
+	</ItemGroup>
 
 </Project>

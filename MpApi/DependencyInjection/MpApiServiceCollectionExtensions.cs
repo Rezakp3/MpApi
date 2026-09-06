@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using MpApi.Core.Authentication;
-using MpApi.Core.Http;
+using MpApi.Common.Authentication;
+using MpApi.Common.Http;
 using MpApi.Core.Options;
 using MpApi.Materials;
 using MpApi.Molecules;
