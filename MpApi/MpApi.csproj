@@ -1,25 +1,41 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<!-- Target Frameworks: .NET 10.0 supported -->
-		<TargetFrameworks>net10.0</TargetFrameworks>
+		<!-- Multi-targeting for maximum compatibility: .NET 8.0 (LTS), .NET 9.0 (Current) and .NET 10.0 (Preview) -->
+		<TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<LangVersion>latest</LangVersion>
 
-		<!-- Package Metadata for NuGet Publication -->
-		<PackageId>MPApi</PackageId>
+		<!-- NuGet Package Identity & Metadata -->
+		<PackageId>MpApi</PackageId>
 		<Version>1.0.0-preview.1</Version>
 		<Authors>Rezakp3;Contributors</Authors>
-		<Company>Materials Project .NET SDK Community</Company>
-		<Description>A high-performance, strongly-typed, modern async C# client for Materials Project API (v2).</Description>
-		<PackageTags>materials-project;materials-science;dft;crystallography;physics;chemistry;api-client</PackageTags>
+		<Company>Materials Project .NET Community</Company>
+		<Description>A modern, high-performance, strongly-typed async C# client for the Materials Project REST API (v2).</Description>
+		<PackageTags>materials-project;materials-science;dft;crystallography;physics;chemistry;battery;semiconductor;api-client</PackageTags>
 		<RepositoryUrl>https://github.com/Rezakp3/MpApi</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/Rezakp3/MpApi</PackageProjectUrl>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+
+		<!-- Documentation and Quality Settings -->
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<NoWarn>$(NoWarn);1591</NoWarn>
-		<!-- Temporarily suppress missing XML comment warnings during migration -->
+		<!-- Suppress missing XML comment warnings for internal members -->
+
+		<!-- SourceLink & Debugging Support -->
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 	</PropertyGroup>
+
+	<!-- Pack README.md into the NuGet package root -->
+	<ItemGroup>
+		<None Include="..\..\README.md" Pack="true" PackagePath="\" Condition="Exists('..\..\README.md')" />
+		<None Include="README.md" Pack="true" PackagePath="\" Condition="Exists('README.md')" />
+	</ItemGroup>
 
 	<!-- Essential NuGet Dependencies -->
 	<ItemGroup>
@@ -30,16 +46,6 @@
 		<PackageReference Include="Microsoft.Extensions.Http" Version="8.0.1" />
 		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
-
-		<!-- High-Performance JSON Handling -->
-	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Common\Utilities\" />
-	  <Folder Include="Domains\Applications\GrainBoundaries\Models\" />
-	  <Folder Include="Domains\Electronic\BandGap\Models\" />
-	  <Folder Include="Domains\Electronic\Xas\Models\" />
-	  <Folder Include="Domains\Thermodynamics\PhaseDiagram\Models\" />
-	  <Folder Include="Extensions\" />
 	</ItemGroup>
 
 </Project>
