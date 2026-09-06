@@ -131,8 +131,7 @@ var molecule = await client.Molecules.Summary.GetByIdAsync("mol-12345");
 
 Console.WriteLine($"Formula: {molecule?.FormulaPretty}");
 Console.WriteLine($"HOMO-LUMO Gap: {molecule?.Gap} eV");
-Console.WriteLine($"Ionization Energy: {molecule?.IonizationEnergy} eV");```
-
+Console.WriteLine($"Ionization Energy: {molecule?.IonizationEnergy} eV");
 🗺️ Architectural Domain Map
 code
 Text
@@ -157,3 +156,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 <p align="center">
 Crafted with ❤️ and Vibe Coding by <a href="https://github.com/Rezakp3">Rezakp3</a> and the open-source community.
 </p>
+```
